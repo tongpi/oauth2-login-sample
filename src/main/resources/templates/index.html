@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>OAuth2 登录 </title>
+</head>
+<body>
+<div style="float: right">
+    <div style="float:left">
+        <span style="font-weight:bold">用户: <span th:text=${userName}></span> </span>
+    </div>
+    <div style="float:none">&nbsp;</div>
+    <div style="float:right">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="注销"/>
+        </form>
+    </div>
+</div>
+<h1>OAuth 2.0 登录使用 Spring Security</h1>
+<div>
+    欢迎你 <span style="font-weight:bold" th:text="${userName}"></span>
+</div>
+</body>
+</html>
