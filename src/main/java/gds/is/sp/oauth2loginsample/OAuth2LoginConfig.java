@@ -30,19 +30,19 @@ public class OAuth2LoginConfig {
     }
 
     private ClientRegistration WSO2ClientRegistration() {
-        return ClientRegistration.withRegistrationId("oauth2-login-sample")
+        return ClientRegistration.withRegistrationId("oauth2-login-sample")           //这是应用的注册Id，这个id就是回调Url中的{registrationId}，命名：应用的英文名称
                 .clientId(env.getProperty(CLIENT_PROPERTY_KEY + "client-id"))
                 .clientSecret(env.getProperty(CLIENT_PROPERTY_KEY + "client-secret"))
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
-                .scope("openid", "profile", "email", "address", "phone")
+                .redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")  //IS中添加的服务提供者的入站认证配置下的OAuth/OpenId连接配置中的回调Url须根据这个模板来填写
+                .scope("openid", "profile", "email", "address", "phone")              //这是本应用期望从IS获取的用户个人信息，登录成功后，系统要求用户确认是否愿意提供这些信息。
                 .authorizationUri(env.getProperty(PROVIDER_PROPERTY_KEY + "authorization-uri"))
                 .tokenUri(env.getProperty(PROVIDER_PROPERTY_KEY + "token-uri"))
                 .userInfoUri(env.getProperty(PROVIDER_PROPERTY_KEY + "user-info-uri"))
                 .userNameAttributeName(IdTokenClaimNames.SUB)
                 .jwkSetUri(env.getProperty(PROVIDER_PROPERTY_KEY + "jwk-set-uri"))
-                .clientName("Oauth登录IS的示例程序")
+                .clientName("Oauth登录IS的示例程序")   //这是应用的显示名称，应用注销后会显示在引导用户重新登录的页面上
                 .build();
     }
 }
